@@ -1,0 +1,20 @@
+version: '3.8'
+
+
+x-service-base: &service-base
+  stdin_open: true
+  tty: true
+  volumes:
+    - .:/app
+    - /app/_build
+    - /app/deps
+    - /app/.deliver
+    - /db
+
+services:
+  dev:
+    <<: *service-base
+    command: ["mix", "run"]
+    build:
+      context: .
+      target: dev
